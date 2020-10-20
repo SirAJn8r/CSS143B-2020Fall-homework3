@@ -14,10 +14,13 @@ public class SingleLinkedList
     public SingleLinkedList(SingleLinkedList list)
     {
         this.size = list.getSize();
-        this.head = new ListNode(list.head.val);
+        this.head = new ListNode();
+        if(list.getSize() >= 1)
+            this.head.val = list.head.val;
+
         ListNode thisTemp = this.head;
         ListNode thatTemp = list.head;
-        for(int i = 1; i < list.getSize(); i++)
+        for(int i = 0; i < list.getSize(); i++)
         {
             thisTemp.next = new ListNode(thatTemp.next.val);
             thisTemp = thisTemp.next;
@@ -27,36 +30,45 @@ public class SingleLinkedList
 
     public int removeAll(int valueToRemove)
     {
+        if(this.size == 0)
+            return 0;
         int count = 0;
         ListNode temp = this.head;
-        for(int i = 0; i < this.getSize()-1; i++)
+        for(int i = 0; i < this.getSize(); i++)
         {
             if(temp.next.val == valueToRemove)
             {
                 temp.next = temp.next.next;
                 count++;
+                this.size--;
+                i--;
+                continue;
             }
             temp = temp.next;
         }
-        if(this.head.val == valueToRemove && this.head.next != null)
-            this.head = this.head.next;
+        //if(this.head.next.val == valueToRemove)
+        //    this.head.next = this.head.next.next;
         return count;
     }
 
     public void reverse()
     {
-        ListNode curr = this.head.next;
-        ListNode prev = this.head;
-        for(int i = 0; i < this.getSize()-1; i++)
+        if(this.size <= 1)
+            return;
+
+        ListNode curr = this.head.next.next;
+        ListNode prev = this.head.next;
+        this.head.next.next = null;
+
+        for(int i = 0; i < this.size-2; i++)
         {
-            ListNode next = curr.next;
+            ListNode nextCurr = curr.next;
             curr.next = prev;
-            curr = next;
-            if(i == this.getSize()-2)
-            {
-                this.head = curr;
-            }
+            prev = curr;
+            curr = nextCurr;
         }
+        this.head.next = curr;
+        this.head.next.next = prev;
     }
 
     // do not change any function below
