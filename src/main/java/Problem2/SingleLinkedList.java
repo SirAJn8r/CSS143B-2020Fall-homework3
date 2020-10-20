@@ -1,30 +1,62 @@
 package Problem2;
 
-// all functions assume using dummy node
-public class SingleLinkedList {
-    // do not add member variables
+public class SingleLinkedList
+{
     private ListNode head;
     private int size;
 
-    public SingleLinkedList() {
-        head = new ListNode();  // dummy node
+    public SingleLinkedList()
+    {
+        this.head = new ListNode();
     }
 
     // copy constructor
-    public SingleLinkedList(SingleLinkedList list) {
-        // homework
+    public SingleLinkedList(SingleLinkedList list)
+    {
+        this.size = list.getSize();
+        this.head = new ListNode(list.head.val);
+        ListNode thisTemp = this.head;
+        ListNode thatTemp = list.head;
+        for(int i = 1; i < list.getSize(); i++)
+        {
+            thisTemp.next = new ListNode(thatTemp.next.val);
+            thisTemp = thisTemp.next;
+            thatTemp = thatTemp.next;
+        }
     }
 
-    public int removeAll(int valueToRemove) {
-        // homework
-        // in-place
-        return -1; // place holder
+    public int removeAll(int valueToRemove)
+    {
+        int count = 0;
+        ListNode temp = this.head;
+        for(int i = 0; i < this.getSize()-1; i++)
+        {
+            if(temp.next.val == valueToRemove)
+            {
+                temp.next = temp.next.next;
+                count++;
+            }
+            temp = temp.next;
+        }
+        if(this.head.val == valueToRemove && this.head.next != null)
+            this.head = this.head.next;
+        return count;
     }
 
-    // reverse the linked list nodes iteratively (no recursion)
-    public void reverse() {
-        // homework
-        // in-place
+    public void reverse()
+    {
+        ListNode curr = this.head.next;
+        ListNode prev = this.head;
+        for(int i = 0; i < this.getSize()-1; i++)
+        {
+            ListNode next = curr.next;
+            curr.next = prev;
+            curr = next;
+            if(i == this.getSize()-2)
+            {
+                this.head = curr;
+            }
+        }
     }
 
     // do not change any function below

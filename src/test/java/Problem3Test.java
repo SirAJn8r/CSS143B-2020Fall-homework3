@@ -103,7 +103,6 @@ public class Problem3Test {
             ptr.next = new ListNode(datum);
             ptr = ptr.next;
         }
-
         return head;
     }
 }

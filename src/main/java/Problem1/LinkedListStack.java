@@ -3,32 +3,34 @@ package Problem1;
 import java.util.LinkedList;
 
 public class LinkedListStack<T> implements Stack<T> {
-    // use Java LinkedList to store the data
-    // do not change member variables
     private LinkedList<T> data;
 
-    public LinkedListStack() {
-        // homework
+    public LinkedListStack()
+    {
+        this.data = new LinkedList<T>();
     }
 
     @Override
-    public boolean push(T val) {
-        // homework
-        return false;   // place holder
+    public boolean push(T val)
+    {
+        this.data.addLast(val);
+        return true;
     }
 
     @Override
-    public T pop() {
-        // homework
-        T val = null;   // place holder
-        return val;   // place holder
+    public T pop()
+    {
+        if(this.data.peek() == null)
+            return null;
+        return this.data.removeLast();
     }
 
     @Override
-    public T peek() {
-        // homework
-        T val = null;   // place holder
-        return val;   // place holder
+    public T peek()
+    {
+        if(this.data.peek() == null)
+            return null;
+        return this.data.getLast();
     }
 
     @Override
