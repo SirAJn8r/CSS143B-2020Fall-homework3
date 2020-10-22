@@ -4,7 +4,7 @@ public class ArrayStack<T> implements Stack<T> {
     private T[] data;
     private int size;
 
-    private ArrayStack() { }
+    private ArrayStack() {  }
 
     public ArrayStack(int capacity)
     {
