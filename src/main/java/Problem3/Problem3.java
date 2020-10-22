@@ -9,14 +9,16 @@ import java.io.PrintStream;
 public class Problem3 {
     public static void printListInReverse(ListNode list, PrintStream print)
     {
+        if(list.next == null)
+            return;
         LinkedListStack<ListNode> stack = new LinkedListStack<>();
-        ListNode pointer = list;
-        while(pointer.next != null)
+        ListNode pointer = list.next;
+        while(pointer != null)
         {
             stack.push(pointer);
             pointer = pointer.next;
         }
         while(stack.peek() != null)
-            print.println(stack.pop().toString());
+            print.print(stack.pop().val + " ");
     }
 }
