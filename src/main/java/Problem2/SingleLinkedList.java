@@ -1,30 +1,74 @@
 package Problem2;
 
-// all functions assume using dummy node
-public class SingleLinkedList {
-    // do not add member variables
+public class SingleLinkedList
+{
     private ListNode head;
     private int size;
 
-    public SingleLinkedList() {
-        head = new ListNode();  // dummy node
+    public SingleLinkedList()
+    {
+        this.head = new ListNode();
     }
 
     // copy constructor
-    public SingleLinkedList(SingleLinkedList list) {
-        // homework
+    public SingleLinkedList(SingleLinkedList list)
+    {
+        this.size = list.getSize();
+        this.head = new ListNode();
+        if(list.getSize() >= 1)
+            this.head.val = list.head.val;
+
+        ListNode thisTemp = this.head;
+        ListNode thatTemp = list.head;
+        for(int i = 0; i < list.getSize(); i++)
+        {
+            thisTemp.next = new ListNode(thatTemp.next.val);
+            thisTemp = thisTemp.next;
+            thatTemp = thatTemp.next;
+        }
     }
 
-    public int removeAll(int valueToRemove) {
-        // homework
-        // in-place
-        return -1; // place holder
+    public int removeAll(int valueToRemove)
+    {
+        if(this.size == 0)
+            return 0;
+        int count = 0;
+        ListNode temp = this.head;
+        for(int i = 0; i < this.getSize(); i++)
+        {
+            if(temp.next.val == valueToRemove)
+            {
+                temp.next = temp.next.next;
+                count++;
+                this.size--;
+                i--;
+                continue;
+            }
+            temp = temp.next;
+        }
+        //if(this.head.next.val == valueToRemove)
+        //    this.head.next = this.head.next.next;
+        return count;
     }
 
-    // reverse the linked list nodes iteratively (no recursion)
-    public void reverse() {
-        // homework
-        // in-place
+    public void reverse()
+    {
+        if(this.size <= 1)
+            return;
+
+        ListNode curr = this.head.next.next;
+        ListNode prev = this.head.next;
+        this.head.next.next = null;
+
+        for(int i = 0; i < this.size-2; i++)
+        {
+            ListNode nextCurr = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextCurr;
+        }
+        this.head.next = curr;
+        this.head.next.next = prev;
     }
 
     // do not change any function below
