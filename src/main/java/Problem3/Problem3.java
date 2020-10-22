@@ -11,14 +11,15 @@ public class Problem3 {
     {
         if(list.next == null)
             return;
-        LinkedListStack<ListNode> stack = new LinkedListStack<>();
+        LinkedListStack<Integer> stack = new LinkedListStack<>();
         ListNode pointer = list.next;
         while(pointer != null)
         {
-            stack.push(pointer);
+            stack.push(pointer.val);
             pointer = pointer.next;
         }
         while(stack.peek() != null)
-            print.print(stack.pop().val + " ");
+            print.print(stack.pop() + " ");
+            //I have errors outside my control when I println, but when I just skip the middleman of replacing \n with " ", it seems to work. I couldn't figure out the error but I don't think it's my programs fault.
     }
 }
